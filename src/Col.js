@@ -1,20 +1,23 @@
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
-import config from './utils/config'
+import { debugBackgroundColor } from './constants'
 
 const createStyles = props => {
-  const { width, marginLeft, marginRight, marginBottom, center, right } = props
+  const { width, marginLeft, marginRight, marginBottom, center, right, debug } = props
+
+  const view = {
+    flex: 0,
+    width,
+    alignItems: center ? 'center' : right ? 'flex-end' : 'stretch',
+    marginLeft,
+    marginRight,
+    marginBottom
+  }
+
+  if (debug) view.backgroundColor = debugBackgroundColor
 
   return StyleSheet.create({
-    view: {
-      flex: 0,
-      width,
-      alignItems: center ? 'center' : right ? 'flex-end' : 'stretch',
-      marginLeft,
-      marginRight,
-      marginBottom,
-      backgroundColor: config.debug ? 'gray' : undefined
-    }
+    view
   })
 }
 
