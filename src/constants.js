@@ -1,2 +1,2 @@
 export const debugBackgroundColor = '#cccccc'
-export const wrapperStyles = { flexDirection: 'row', flexWrap: 'wrap' }
+export const wrapperStyles = () => ({ flexDirection: 'row', flexWrap: 'wrap' })

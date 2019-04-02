@@ -14,7 +14,7 @@ test('Correct defaults without config are applied.', () => {
   const tree = renderer.create(Grid).toJSON()
 
   expect(tree.type).toEqual('View')
-  expect(tree.props.style[0]).toEqual(wrapperStyles)
+  expect(tree.props.style[0]).toEqual(wrapperStyles())
   expect(tree.children.length).toEqual(1)
 
   // Non Col elements are wrapped in a full width Col.
@@ -63,11 +63,11 @@ test('Global padding around Grid can be set.', () => {
   const tree = renderer.create(Grid).toJSON()
 
   expect(tree.type).toEqual('View')
-  expect(tree.props.style).toEqual(10)
+  expect(tree.props.style[0].padding).toEqual(10)
   expect(tree.children.length).toEqual(1)
 
   const col = tree.children[0]
 
   expect(col.type).toEqual('View')
-  expect(col.props.style.width).toEqual(420)
+  expect(col.props.style.width).toEqual(380)
 })

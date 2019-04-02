@@ -11,7 +11,7 @@ export default cols => {
   const totalSpace = (config.cols - 1) * config.colSpace
   const space = (cols - 1) * config.colSpace
   // screenwidth - Screenpadding left and right - all space
-  const singleColWidth = (config.width - (2 * config.padding) - totalSpace) / config.cols
+  const singleColWidth = (config.width - totalSpace) / config.cols
 
   return singleColWidth * cols + space
 }

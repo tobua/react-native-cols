@@ -5,7 +5,7 @@ import createConfig from './utils/create-config'
 import { wrapperStyles } from './constants'
 
 const getStyles = config => {
-  const screen = wrapperStyles
+  const screen = wrapperStyles()
 
   if (config.padding) screen.padding = config.padding
 
@@ -21,8 +21,6 @@ export default class Cols extends Component {
     const config = createConfig(this.props)
     const styles = getStyles(config)
     const enhancedChildren = enhanceChildren(children, config)
-
-    // console.log('config', config)
 
     return (
       <View style={[styles.screen, style]}>

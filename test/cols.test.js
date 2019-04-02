@@ -9,7 +9,7 @@ test('Renders empty Cols correctly.', () => {
   const tree = renderer.create(Grid).toJSON()
 
   expect(tree.type).toEqual('View')
-  expect(tree.props.style[0]).toEqual(wrapperStyles)
+  expect(tree.props.style[0]).toEqual(wrapperStyles())
   expect(tree.children).toEqual(null)
 })
 
