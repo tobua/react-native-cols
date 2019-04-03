@@ -1,7 +1,7 @@
 import React from 'react'
-import { Text, Dimensions } from 'react-native'
+import { Text } from 'react-native'
 import { Cols } from 'react-native-cols'
-import renderer from 'react-test-renderer'
+import renderToTree from './utils/render-to-tree'
 import { debugBackgroundColor, wrapperStyles } from './../src/constants'
 
 test('Correct defaults without config are applied.', () => {
@@ -11,7 +11,7 @@ test('Correct defaults without config are applied.', () => {
     </Cols>
   )
 
-  const tree = renderer.create(Grid).toJSON()
+  const tree = renderToTree(Grid)
 
   expect(tree.type).toEqual('View')
   expect(tree.props.style[0]).toEqual(wrapperStyles())
@@ -37,7 +37,7 @@ test('Debug mode can be set on Cols coloring the cols.', () => {
     </Cols>
   )
 
-  const tree = renderer.create(Grid).toJSON()
+  const tree = renderToTree(Grid)
 
   expect(tree.type).toEqual('View')
   expect(tree.children.length).toEqual(1)
@@ -60,7 +60,7 @@ test('Global padding around Grid can be set.', () => {
     </Cols>
   )
 
-  const tree = renderer.create(Grid).toJSON()
+  const tree = renderToTree(Grid)
 
   expect(tree.type).toEqual('View')
   expect(tree.props.style[0].padding).toEqual(10)
@@ -70,4 +70,41 @@ test('Global padding around Grid can be set.', () => {
 
   expect(col.type).toEqual('View')
   expect(col.props.style.width).toEqual(380)
+})
+
+test('Cols style is added to the wrapper.', () => {
+  const style = { borderWidth: 1, borderColor: 'red' }
+  const Grid = (
+    <Cols style={style}>
+      <Text>Style</Text>
+    </Cols>
+  )
+
+  const tree = renderToTree(Grid)
+
+  expect(tree.type).toEqual('View')
+  expect(tree.props.style[1]).toEqual(style)
+})
+
+test('colStyle is added to wrapped Col.', () => {
+  const style = { borderWidth: 1, borderColor: 'red', width: 100 }
+  const Grid = (
+    <Cols colStyle={style}>
+      <Text>ColStyle</Text>
+    </Cols>
+  )
+
+  const tree = renderToTree(Grid)
+
+  expect(tree.type).toEqual('View')
+  expect(tree.props.style[0]).toEqual(wrapperStyles())
+  expect(tree.children.length).toEqual(1)
+
+  const col = tree.children[0]
+
+  expect(col.type).toEqual('View')
+  expect(col.props.style.borderWidth).toEqual(style.borderWidth)
+  expect(col.props.style.borderColor).toEqual(style.borderColor)
+  // Properties necessary for alignment have priority
+  expect(col.props.style.width).toEqual(400)
 })

@@ -35,8 +35,7 @@ module.exports = {
     '**/?(*.)+(spec|test).(js|ts|tsx)',
   ],
   setupFiles: [
-    require.resolve('./node_modules/react-native/jest/setup.js'),
-    '<rootDir>/test/jest.init.js',
+    require.resolve('./node_modules/react-native/jest/setup.js')
   ],
   testEnvironment: 'node'
 }

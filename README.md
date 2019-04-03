@@ -37,6 +37,7 @@ class Screen extends Component {
   rowSpace={15}
   debug={false}
   style={}
+  colStyle={}
 >
   // Column component with defaults added.
   <Col
@@ -64,6 +65,8 @@ The wrapper component sets the defaults for all `<Col />` components wrapped.
 `debug` Highlights cols with a light grey background.
 
 `style` Optional styles for the wrapper component.
+
+`colStyle` Optional styles applied to every col.
 
 ### `<Col />`
 

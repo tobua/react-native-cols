@@ -12,11 +12,11 @@ export const getConfig = () => config
 let positionStart = 0
 let positionEnd = 0
 
-const mapChild = child => {
+const mapChild = (props, child) => {
   if (child.type !== Col) {
     positionStart = 0
     // Wrap the child in a full width col.
-    return wrapRegular(child)
+    return wrapRegular(child, props)
   }
 
   const { span, offset } = getColProps(child)
@@ -47,16 +47,20 @@ const mapChild = child => {
   // Swap positions for next iteration.
   positionStart = positionEnd % config.cols
 
-  return cloneElement(child, {
+  const newProps = {
     width,
     marginLeft,
     marginRight,
     marginBottom,
     debug: config.debug
-  })
+  }
+
+  if (props.colStyle) { newProps.style = props.colStyle }
+
+  return cloneElement(child, newProps)
 }
 
-export default (children, currentConfig) => {
+export default (children, currentConfig, props) => {
   config = currentConfig
-  return Children.map(children, mapChild)
+  return Children.map(children, mapChild.bind(null, props))
 }

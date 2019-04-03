@@ -15,12 +15,28 @@ const getStyles = config => {
 }
 
 export default class Cols extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  // Get the available width after first rendering am empty view.
+  onLayout = event => {
+    if (this.state.width) return
+    let { width } = event.nativeEvent.layout
+    this.setState({ width })
+  }
+
   render() {
-    const { style } = this.props
-    const children = this.props.children
-    const config = createConfig(this.props)
+    const { style, children } = this.props
+    const { width } = this.state
+
+    // Return an empty View first, to measure the width after it's rendered.
+    if (!width) return <View onLayout={this.onLayout} />
+
+    const config = createConfig(this.props, width)
     const styles = getStyles(config)
-    const enhancedChildren = enhanceChildren(children, config)
+    const enhancedChildren = enhanceChildren(children, config, this.props)
 
     return (
       <View style={[styles.screen, style]}>

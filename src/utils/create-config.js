@@ -1,7 +1,3 @@
-import { Dimensions } from 'react-native'
-
-const width = Dimensions.get('window').width
-
 const defaults = {
   cols: 4,
   colSpace: 10,
@@ -9,7 +5,10 @@ const defaults = {
   debug: false
 }
 
+// Change defaults for every grid.
 export const setDefaults = values => Object.assign(defaults, values)
+// Returns the current defaults.
+export const getDefaults = () => defaults
 
 // Create a new context object with defaults or overrides from props.
 export default ({
@@ -18,7 +17,7 @@ export default ({
   colSpace = defaults.colSpace,
   rowSpace = defaults.rowSpace,
   debug = defaults.debug
-}) => {
+}, width) => {
   const config = ({
     width,
     cols,
