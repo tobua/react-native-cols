@@ -1,6 +1,6 @@
 <p></p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/naminho/ftpme/master/preview.png" alt="React Native Cols Preview">
+  <img src="https://raw.githubusercontent.com/naminho/react-native-cols/master/preview.png" width="400" alt="React Native Cols Preview">
 </p>
 
 # React Native Cols
