@@ -102,7 +102,7 @@ The example app shown on top is found in the repository. Run it by cloning this 
 
 ```
 npm install
-npm run app
+npm run app --silent
 cd app
 react-native run-ios
 ```

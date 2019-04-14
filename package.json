@@ -1,8 +1,9 @@
 {
   "name": "react-native-cols",
   "description": "Grid Component for React Native.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Matthias Giger",
+  "repository": "github:naminho/react-native-cols",
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
