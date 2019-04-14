@@ -1,17 +1,16 @@
-import { getConfig } from './index'
+import { getConfig } from './../utils/config'
 
-// Calculates the width of a span 1 col without spaces.
-export default cols => {
+// Get the width of a col by span including the covered space.
+export default span => {
   const config = getConfig()
 
-  if (cols === 0) {
+  if (span === 0) {
     return 0
   }
 
-  const totalSpace = (config.cols - 1) * config.colSpace
-  const space = (cols - 1) * config.colSpace
-  // screenwidth - Screenpadding left and right - all space
-  const singleColWidth = (config.width - totalSpace) / config.cols
+  const generalColSpace = (config.cols - 1) * config.colSpace
+  const coveredColSpace = (span - 1) * config.colSpace
+  const singleColWidth = (config.width - generalColSpace) / config.cols
 
-  return singleColWidth * cols + space
+  return singleColWidth * span + coveredColSpace
 }

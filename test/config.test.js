@@ -1,8 +1,11 @@
 import React from 'react'
 import { Text } from 'react-native'
-import { Cols } from 'react-native-cols'
+import { Cols, Col } from 'react-native-cols'
 import renderToTree from './utils/render-to-tree'
 import { debugBackgroundColor, wrapperStyles } from './../src/constants'
+import { getDefaults } from './../src/utils/config'
+
+const { cols, colSpace, rowSpace, debug } = getDefaults()
 
 test('Correct defaults without config are applied.', () => {
   const Grid = (
@@ -87,7 +90,7 @@ test('Cols style is added to the wrapper.', () => {
 })
 
 test('colStyle is added to wrapped Col.', () => {
-  const style = { borderWidth: 1, borderColor: 'red', width: 100 }
+  const style = { borderWidth: 1, borderColor: 'red' }
   const Grid = (
     <Cols colStyle={style}>
       <Text>ColStyle</Text>
@@ -105,6 +108,28 @@ test('colStyle is added to wrapped Col.', () => {
   expect(col.type).toEqual('View')
   expect(col.props.style.borderWidth).toEqual(style.borderWidth)
   expect(col.props.style.borderColor).toEqual(style.borderColor)
-  // Properties necessary for alignment have priority
-  expect(col.props.style.width).toEqual(400)
+})
+
+test('colSpace and rowSpace can be configured.', () => {
+  const currentColSpace = 12
+  const currentRowSpace = 13
+  const Grid = (
+    <Cols colSpace={currentColSpace} rowSpace={currentRowSpace}>
+      <Text>ColStyle</Text>
+      <Col span={4} />
+      <Col />
+    </Cols>
+  )
+
+  const tree = renderToTree(Grid)
+
+  expect(tree.type).toEqual('View')
+  expect(tree.props.style[0]).toEqual(wrapperStyles())
+
+  expect(tree.children.length).toEqual(3)
+
+  expect(tree.children[0].props.style.marginBottom).toEqual(currentRowSpace)
+  expect(tree.children[1].props.style.marginBottom).toEqual(currentRowSpace)
+  // Should last row really have rowSpace added?
+  expect(tree.children[2].props.style.marginBottom).toEqual(currentRowSpace)
 })

@@ -1,4 +1,4 @@
-import { getConfig } from './index'
+import { getConfig } from './../utils/config'
 
 export default child => {
   const config = getConfig()

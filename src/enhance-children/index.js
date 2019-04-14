@@ -3,14 +3,12 @@ import Col from './../Col'
 import wrapRegular from './wrap-regular'
 import getColWidth from './get-col-width'
 import getColProps from './get-col-props'
+import { getConfig } from './../utils/config'
 import { calculateMarginLeft, calculateMarginRight } from './calculate-margins'
 
-let config = {}
-export const getConfig = () => config
-
 // Stores the number of current cols during iteration.
-let positionStart = 0
-let positionEnd = 0
+let positionStart
+let positionEnd
 
 const mapChild = (props, child) => {
   if (child.type !== Col) {
@@ -19,6 +17,7 @@ const mapChild = (props, child) => {
     return wrapRegular(child, props)
   }
 
+  const config = getConfig()
   const { span, offset } = getColProps(child)
 
   const totalSpan = (span + offset)
@@ -60,7 +59,10 @@ const mapChild = (props, child) => {
   return cloneElement(child, newProps)
 }
 
-export default (children, currentConfig, props) => {
-  config = currentConfig
+export default (children, props) => {
+  // Reset positions for iteration.
+  positionStart = 0
+  positionEnd = 0
+
   return Children.map(children, mapChild.bind(null, props))
 }

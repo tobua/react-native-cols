@@ -6,31 +6,35 @@ import { exec } from 'child_process'
 import copy from 'recursive-copy'
 import rimraf from 'rimraf'
 
-const appName = 'ColsApp'
-
 // Enhances source files inside /app with a fresh RN project template.
 (async () => {
+  const appName = 'ColsApp'
   const execute = promisify(exec)
 
-  console.log('Initializing fresh RN project...')
+  console.log('Initializing a fresh RN project...')
+
+  // Remove local CLI, as it interferes with the global.
+  rimraf.sync('node_modules/@react-native-community/cli')
 
   // Initialize RN project.
-  await execute(`react-native init ${appName}`)
+  await execute(`react-native init ${appName}`, {
+    cwd: 'app'
+  })
 
   // Copy to destination directory, leaving source files untouched.
-  const results = await copy(appName, 'app', {
+  const results = await copy(`app/${appName}`, 'app', {
     dot: true,
     overwrite: false,
     filter: ['**/*', '!App.js']
   })
 
   // Remove temporary project directory.
-  rimraf.sync(appName)
+  rimraf.sync(`app/${appName}`)
 
   // Install this package locally, avoiding symlinks.
   await execute('npm install $(npm pack .. | tail -1)', {
     cwd: join(__dirname, 'app')
   })
 
-  console.log('🍞 Fresh React Native App created inside /app.')
+  console.log('🍞 React Native App created inside /app.')
 })()

@@ -11,7 +11,7 @@ export const setDefaults = values => Object.assign(defaults, values)
 export const getDefaults = () => defaults
 
 // Create a new context object with defaults or overrides from props.
-export default ({
+const create = ({
   padding = 0,
   cols = defaults.cols,
   colSpace = defaults.colSpace,
@@ -33,3 +33,8 @@ export default ({
 
   return config
 }
+
+let config = {}
+
+export const setConfig = (values, width) => (config = create(values, width))
+export const getConfig = () => config

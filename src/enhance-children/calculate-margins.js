@@ -1,4 +1,4 @@
-import { getConfig } from './index'
+import { getConfig } from './../utils/config'
 import getColWidth from './get-col-width'
 
 // Calculates the left margin necessary inclucing offset margin.
@@ -14,5 +14,5 @@ export const calculateMarginLeft = (position, offset = 0) => {
 export const calculateMarginRight = position => {
   const config = getConfig()
 
-  position < config.cols ? config.colSpace / 2 : 0
+  return position < config.cols ? config.colSpace / 2 : 0
 }

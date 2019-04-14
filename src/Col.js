@@ -1,22 +1,21 @@
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { debugBackgroundColor } from './constants'
+import getPosition from './utils/get-position'
 
 const createStyles = props => {
-  const { width, marginLeft, marginRight, marginBottom, center, right, debug, style } = props
+  const { width, marginLeft, marginRight, marginBottom, debug, style } = props
 
   let view = {
-    flex: 0,
     width,
-    alignItems: center ? 'center' : right ? 'flex-end' : 'stretch',
+    alignItems: getPosition(props),
     marginLeft,
     marginRight,
     marginBottom
   }
 
   if (debug) { view.backgroundColor = debugBackgroundColor }
-
-  if (style) { view = Object.assign({}, style, view) }
+  if (style) { view = Object.assign({}, view, style) }
 
   return StyleSheet.create({
     view

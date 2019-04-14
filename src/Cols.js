@@ -1,13 +1,13 @@
 import React, { Component, createContext } from 'react'
 import { StyleSheet, View } from 'react-native'
 import enhanceChildren from './enhance-children'
-import createConfig from './utils/create-config'
+import { setConfig } from './utils/config'
 import { wrapperStyles } from './constants'
 
 const getStyles = config => {
   const screen = wrapperStyles()
 
-  if (config.padding) screen.padding = config.padding
+  if (config.padding) { screen.padding = config.padding }
 
   return StyleSheet.create({
     screen
@@ -32,11 +32,11 @@ export default class Cols extends Component {
     const { width } = this.state
 
     // Return an empty View first, to measure the width after it's rendered.
-    if (!width) return <View onLayout={this.onLayout} />
+    if (!width) return <View style={{ width: '100%' }} onLayout={this.onLayout} />
 
-    const config = createConfig(this.props, width)
+    const config = setConfig(this.props, width)
     const styles = getStyles(config)
-    const enhancedChildren = enhanceChildren(children, config, this.props)
+    const enhancedChildren = enhanceChildren(children, this.props)
 
     return (
       <View style={[styles.screen, style]}>

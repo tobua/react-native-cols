@@ -1,3 +1,8 @@
+<p></p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/naminho/ftpme/master/preview.png" alt="React Native Cols Preview">
+</p>
+
 # React Native Cols
 
 Grid for React Native Apps.
@@ -10,16 +15,24 @@ npm i react-native-cols
 
 ## Usage
 
-```js
+```jsx
 import React, { Component } from 'react'
+import { Text } from 'react-native'
 import { Cols, Col } from 'react-native-cols'
 
 class Screen extends Component {
   render() {
     return (
-      <Cols cols="2">
-        <Col><Text>First</Text></Col>
-        <Col><Text>Second</Text></Col>
+      <Cols>
+        <Col>
+          <Text>First</Text>
+        </Col>
+        <Col span={2}>
+          <Text>Second</Text>
+        </Col>
+        <Col>
+          <Text>Third</Text>
+        </Col>
       </Cols>
     )
   }
@@ -28,7 +41,7 @@ class Screen extends Component {
 
 ## Props
 
-```js
+```jsx
 // Wrapper component with possible props and their defaults.
 <Cols
   cols={4}
@@ -46,6 +59,7 @@ class Screen extends Component {
     left={true}
     center={false}
     right={false}
+    style={}
   ></Col>
 </Cols>
 ```
@@ -66,7 +80,8 @@ The wrapper component sets the defaults for all `<Col />` components wrapped.
 
 `style` Optional styles for the wrapper component.
 
-`colStyle` Optional styles applied to every col.
+`colStyle` Optional styles applied to every col, possibly overriding generated
+values.
 
 ### `<Col />`
 
@@ -83,8 +98,7 @@ values.
 
 ## Running the Example App
 
-To create a fresh React Native app with the example seen in the screenshot on
-top clone this repository and run the following.
+The example app shown on top is found in the repository. Run it by cloning this repository and then executing the following commands inside the main directory.
 
 ```
 npm install

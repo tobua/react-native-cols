@@ -10,14 +10,14 @@
     "app": "babel-node create-app"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
+    "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
-    "@babel/preset-env": "^7.3.4",
-    "babel-jest": "^24.6.0",
-    "jest": "^24.6.0",
+    "@babel/preset-env": "^7.4.3",
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1",
     "metro-react-native-babel-preset": "^0.53.1",
     "react": "^16.8.6",
-    "react-native": "^0.59.3",
+    "react-native": "^0.59.4",
     "react-test-renderer": "^16.8.6",
     "recursive-copy": "^2.0.10",
     "rimraf": "^2.6.3"
