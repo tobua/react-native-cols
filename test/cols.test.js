@@ -2,13 +2,14 @@ import React from 'react'
 import { Text } from 'react-native'
 import { Cols, Col } from 'react-native-cols'
 import renderToTree from './utils/render-to-tree'
-import { wrapperStyles } from './../src/constants'
 import { getDefaults } from './../src/utils/config'
 import { viewWidth } from './constants'
 
 const { colSpace, rowSpace, debug } = getDefaults()
 
-const colWidth = (currentCols, colSpace, totalCols) => ((viewWidth - colSpace * (totalCols - 1)) / totalCols) * currentCols + (currentCols - 1) * colSpace
+const colWidth = (currentCols, colSpace, totalCols) =>
+  ((viewWidth - colSpace * (totalCols - 1)) / totalCols) * currentCols +
+  (currentCols - 1) * colSpace
 
 test('Renders empty Cols correctly.', () => {
   const Grid = <Cols />
@@ -16,7 +17,10 @@ test('Renders empty Cols correctly.', () => {
   const tree = renderToTree(Grid)
 
   expect(tree.type).toEqual('View')
-  expect(tree.props.style[0]).toEqual(wrapperStyles())
+  expect(tree.props.style[0]).toEqual({
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  })
   expect(tree.children).toEqual(null)
 })
 
@@ -43,7 +47,10 @@ test('rowSpace defaults work properly.', () => {
   const tree = renderToTree(Grid)
 
   expect(tree.type).toEqual('View')
-  expect(tree.props.style[0]).toEqual(wrapperStyles())
+  expect(tree.props.style[0]).toEqual({
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  })
 
   expect(tree.children.length).toEqual(3)
 
@@ -68,15 +75,21 @@ test('Renders three cols with cols set to 3 correctly.', () => {
   expect(tree.children.length).toEqual(3)
 
   expect(tree.children[0].props.style.marginLeft).toEqual(0)
-  expect(tree.children[0].props.style.width).toEqual(colWidth(1, colSpace, cols))
+  expect(tree.children[0].props.style.width).toEqual(
+    colWidth(1, colSpace, cols)
+  )
   expect(tree.children[0].props.style.marginRight).toEqual(colSpace / 2)
 
   expect(tree.children[1].props.style.marginLeft).toEqual(colSpace / 2)
-  expect(tree.children[1].props.style.width).toEqual(colWidth(1, colSpace, cols))
+  expect(tree.children[1].props.style.width).toEqual(
+    colWidth(1, colSpace, cols)
+  )
   expect(tree.children[1].props.style.marginRight).toEqual(colSpace / 2)
 
   expect(tree.children[2].props.style.marginLeft).toEqual(colSpace / 2)
-  expect(tree.children[2].props.style.width).toEqual(colWidth(1, colSpace, cols))
+  expect(tree.children[2].props.style.width).toEqual(
+    colWidth(1, colSpace, cols)
+  )
   expect(tree.children[2].props.style.marginRight).toEqual(0)
 })
 
@@ -95,27 +108,35 @@ test('Renders three cols with cols set to 3 correctly.', () => {
   expect(tree.children.length).toEqual(3)
 
   expect(tree.children[0].props.style.marginLeft).toEqual(0)
-  expect(tree.children[0].props.style.width).toEqual(colWidth(2, colSpace, cols))
+  expect(tree.children[0].props.style.width).toEqual(
+    colWidth(2, colSpace, cols)
+  )
   expect(tree.children[0].props.style.marginRight).toEqual(colSpace / 2)
 
   expect(tree.children[1].props.style.marginLeft).toEqual(colSpace / 2)
-  expect(tree.children[1].props.style.width).toEqual(colWidth(3, colSpace, cols))
+  expect(tree.children[1].props.style.width).toEqual(
+    colWidth(3, colSpace, cols)
+  )
   expect(tree.children[1].props.style.marginRight).toEqual(colSpace / 2)
 
-  expect(tree.children[2].props.style.marginLeft).toEqual(colWidth(1, colSpace, cols) + colSpace + colSpace / 2)
-  expect(tree.children[2].props.style.width).toEqual(colWidth(1, colSpace, cols))
+  expect(tree.children[2].props.style.marginLeft).toEqual(
+    colWidth(1, colSpace, cols) + colSpace + colSpace / 2
+  )
+  expect(tree.children[2].props.style.width).toEqual(
+    colWidth(1, colSpace, cols)
+  )
   expect(tree.children[2].props.style.marginRight).toEqual(0)
 
   // Fills the full row.
   expect(
     tree.children[0].props.style.marginLeft +
-    tree.children[0].props.style.width +
-    tree.children[0].props.style.marginRight +
-    tree.children[1].props.style.marginLeft +
-    tree.children[1].props.style.width +
-    tree.children[1].props.style.marginRight +
-    tree.children[2].props.style.marginLeft +
-    tree.children[2].props.style.width +
-    tree.children[2].props.style.marginRight
+      tree.children[0].props.style.width +
+      tree.children[0].props.style.marginRight +
+      tree.children[1].props.style.marginLeft +
+      tree.children[1].props.style.width +
+      tree.children[1].props.style.marginRight +
+      tree.children[2].props.style.marginLeft +
+      tree.children[2].props.style.width +
+      tree.children[2].props.style.marginRight
   ).toEqual(viewWidth)
 })

@@ -2,7 +2,6 @@ import React from 'react'
 import { Text } from 'react-native'
 import { Cols, Col } from 'react-native-cols'
 import renderToTree from './utils/render-to-tree'
-import { debugBackgroundColor, wrapperStyles } from './../src/constants'
 import { getDefaults } from './../src/utils/config'
 
 const { cols, colSpace, rowSpace, debug } = getDefaults()
@@ -17,7 +16,10 @@ test('Correct defaults without config are applied.', () => {
   const tree = renderToTree(Grid)
 
   expect(tree.type).toEqual('View')
-  expect(tree.props.style[0]).toEqual(wrapperStyles())
+  expect(tree.props.style[0]).toEqual({
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  })
   expect(tree.children.length).toEqual(1)
 
   // Non Col elements are wrapped in a full width Col.
@@ -48,7 +50,7 @@ test('Debug mode can be set on Cols coloring the cols.', () => {
   const col = tree.children[0]
 
   expect(col.type).toEqual('View')
-  expect(col.props.style.backgroundColor).toEqual(debugBackgroundColor)
+  expect(col.props.style.backgroundColor).toEqual('#cccccc')
 
   const text = col.children[0]
 
@@ -100,7 +102,10 @@ test('colStyle is added to wrapped Col.', () => {
   const tree = renderToTree(Grid)
 
   expect(tree.type).toEqual('View')
-  expect(tree.props.style[0]).toEqual(wrapperStyles())
+  expect(tree.props.style[0]).toEqual({
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  })
   expect(tree.children.length).toEqual(1)
 
   const col = tree.children[0]
@@ -124,7 +129,10 @@ test('colSpace and rowSpace can be configured.', () => {
   const tree = renderToTree(Grid)
 
   expect(tree.type).toEqual('View')
-  expect(tree.props.style[0]).toEqual(wrapperStyles())
+  expect(tree.props.style[0]).toEqual({
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  })
 
   expect(tree.children.length).toEqual(3)
 

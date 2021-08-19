@@ -1,2 +1,2 @@
-export { default as Col } from './Col'
-export { default as Cols } from './Cols'
+export { Col } from './Col'
+export { Cols } from './Cols'

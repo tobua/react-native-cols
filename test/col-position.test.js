@@ -5,7 +5,7 @@ import renderToTree from './utils/render-to-tree'
 import { getDefaults } from './../src/utils/config'
 import { viewWidth } from './constants'
 
-test('Renders the Col\'s with the correct positioning.', () => {
+test("Renders the Col's with the correct positioning.", () => {
   const Grid = (
     <Cols>
       <Col />

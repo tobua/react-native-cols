@@ -1,47 +1,40 @@
-import React, { Component, createContext } from 'react'
+import React, { useState, useCallback } from 'react'
 import { StyleSheet, View } from 'react-native'
 import enhanceChildren from './enhance-children'
 import { setConfig } from './utils/config'
-import { wrapperStyles } from './constants'
 
-const getStyles = config => {
-  const screen = wrapperStyles()
+const getStyles = (config) => {
+  const screen = { flexDirection: 'row', flexWrap: 'wrap' }
 
-  if (config.padding) { screen.padding = config.padding }
+  if (config.padding) {
+    screen.padding = config.padding
+  }
 
   return StyleSheet.create({
-    screen
+    screen,
   })
 }
 
-export default class Cols extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
+const useComponentSize = () => {
+  const [size, setSize] = useState({})
 
-  // Get the available width after first rendering am empty view.
-  onLayout = event => {
-    if (this.state.width) return
-    let { width } = event.nativeEvent.layout
-    this.setState({ width })
-  }
+  const onLayout = useCallback((event) => {
+    const { width, height } = event.nativeEvent.layout
+    setSize({ width, height })
+  }, [])
 
-  render() {
-    const { style, children } = this.props
-    const { width } = this.state
+  return [size, onLayout]
+}
 
-    // Return an empty View first, to measure the width after it's rendered.
-    if (!width) return <View style={{ width: '100%' }} onLayout={this.onLayout} />
+export const Cols = ({ style, children, ...props }) => {
+  const [size, onLayout] = useComponentSize()
 
-    const config = setConfig(this.props, width)
-    const styles = getStyles(config)
-    const enhancedChildren = enhanceChildren(children, this.props)
+  // Return an empty View first, to measure the width after it's rendered.
+  if (!size.width) return <View style={{ width: '100%' }} onLayout={onLayout} />
 
-    return (
-      <View style={[styles.screen, style]}>
-        {enhancedChildren}
-      </View>
-    )
-  }
+  const config = setConfig(props, size.width)
+  const styles = getStyles(config)
+  const enhancedChildren = enhanceChildren(children, props)
+
+  return <View style={[styles.screen, style]}>{enhancedChildren}</View>
 }

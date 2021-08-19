@@ -7,12 +7,16 @@ import { viewWidth } from './constants'
 
 const { cols, colSpace, rowSpace, debug } = getDefaults()
 
-const colWidth = (currentCols, colSpace) => ((viewWidth - colSpace * (cols - 1)) / cols) * currentCols + (currentCols - 1) * colSpace
+const colWidth = (currentCols, colSpace) =>
+  ((viewWidth - colSpace * (cols - 1)) / cols) * currentCols +
+  (currentCols - 1) * colSpace
 
 test('Renders a single Col with default span of 1.', () => {
   const Grid = (
     <Cols>
-      <Col><Text>Col</Text></Col>
+      <Col>
+        <Text>Col</Text>
+      </Col>
     </Cols>
   )
 
@@ -55,7 +59,7 @@ test('Renders a single Col with span of 1.', () => {
   expect(col.props.style.marginRight).toEqual(colSpace / 2)
 })
 
-test('Renders a row of Col\'s with span of 1.', () => {
+test("Renders a row of Col's with span of 1.", () => {
   const Grid = (
     <Cols>
       <Col span={1} />
@@ -89,7 +93,9 @@ test('Renders a row of Col\'s with span of 1.', () => {
 test('Renders a single Col with span as string.', () => {
   const Grid = (
     <Cols>
-      <Col span="1"><Text>Col</Text></Col>
+      <Col span="1">
+        <Text>Col</Text>
+      </Col>
     </Cols>
   )
 
@@ -195,13 +201,13 @@ test('Renders a full row with different spans correctly.', () => {
   // Fills the full row.
   expect(
     tree.children[0].props.style.marginLeft +
-    tree.children[0].props.style.width +
-    tree.children[0].props.style.marginRight +
-    tree.children[1].props.style.marginLeft +
-    tree.children[1].props.style.width +
-    tree.children[1].props.style.marginRight +
-    tree.children[2].props.style.marginLeft +
-    tree.children[2].props.style.width +
-    tree.children[2].props.style.marginRight
+      tree.children[0].props.style.width +
+      tree.children[0].props.style.marginRight +
+      tree.children[1].props.style.marginLeft +
+      tree.children[1].props.style.width +
+      tree.children[1].props.style.marginRight +
+      tree.children[2].props.style.marginLeft +
+      tree.children[2].props.style.width +
+      tree.children[2].props.style.marginRight
   ).toEqual(viewWidth)
 })

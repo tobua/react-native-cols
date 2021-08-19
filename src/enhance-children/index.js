@@ -1,5 +1,5 @@
 import React, { cloneElement, Children } from 'react'
-import Col from './../Col'
+import { Col } from './../Col'
 import wrapRegular from './wrap-regular'
 import getColWidth from './get-col-width'
 import getColProps from './get-col-props'
@@ -20,7 +20,7 @@ const mapChild = (props, child) => {
   const config = getConfig()
   const { span, offset } = getColProps(child)
 
-  const totalSpan = (span + offset)
+  const totalSpan = span + offset
   // positionX: value, 0 means on the left, config.cols means on the right
   positionEnd = positionStart + totalSpan
 
@@ -51,10 +51,12 @@ const mapChild = (props, child) => {
     marginLeft,
     marginRight,
     marginBottom,
-    debug: config.debug
+    debug: config.debug,
   }
 
-  if (props.colStyle) { newProps.style = props.colStyle }
+  if (props.colStyle) {
+    newProps.style = props.colStyle
+  }
 
   return cloneElement(child, newProps)
 }

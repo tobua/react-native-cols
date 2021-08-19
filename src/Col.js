@@ -1,36 +1,38 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { debugBackgroundColor } from './constants'
 import getPosition from './utils/get-position'
 
-const createStyles = props => {
-  const { width, marginLeft, marginRight, marginBottom, debug, style } = props
-
+const createStyles = ({
+  width,
+  marginLeft,
+  marginRight,
+  marginBottom,
+  debug,
+  style,
+  ...props
+}) => {
   let view = {
     width,
     alignItems: getPosition(props),
     marginLeft,
     marginRight,
-    marginBottom
+    marginBottom,
   }
 
-  if (debug) { view.backgroundColor = debugBackgroundColor }
-  if (style) { view = Object.assign({}, view, style) }
+  if (debug) {
+    view.backgroundColor = '#cccccc'
+  }
+  if (style) {
+    view = Object.assign({}, view, style)
+  }
 
   return StyleSheet.create({
-    view
+    view,
   })
 }
 
-export default class Col extends Component {
-  render() {
-    const { children } = this.props
-    const styles = createStyles(this.props)
+export const Col = ({ children, ...props }) => {
+  const styles = createStyles(props)
 
-    return (
-      <View style={styles.view}>
-        {children}
-      </View>
-    )
-  }
+  return <View style={styles.view}>{children}</View>
 }

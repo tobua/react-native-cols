@@ -1,5 +1,5 @@
 import React from 'react'
-import Col from './../Col'
+import { Col } from './../Col'
 import { getConfig } from './../utils/config'
 import getColWidth from './get-col-width'
 
