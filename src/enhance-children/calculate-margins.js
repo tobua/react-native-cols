@@ -11,7 +11,7 @@ export const calculateMarginLeft = (position, offset = 0) => {
 }
 
 // Calculates the margin necessary on the right.
-export const calculateMarginRight = position => {
+export const calculateMarginRight = (position) => {
   const config = getConfig()
 
   return position < config.cols ? config.colSpace / 2 : 0

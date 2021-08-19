@@ -1,4 +1,4 @@
-import React, { cloneElement, Children } from 'react'
+import { cloneElement, Children } from 'react'
 import { Col } from './../Col'
 import wrapRegular from './wrap-regular'
 import getColWidth from './get-col-width'
@@ -41,7 +41,7 @@ const mapChild = (props, child) => {
     marginRight = calculateMarginRight(positionEnd)
   }
 
-  marginBottom = config.rowSpace
+  const marginBottom = config.rowSpace
 
   // Swap positions for next iteration.
   positionStart = positionEnd % config.cols

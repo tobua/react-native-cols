@@ -1,7 +1,7 @@
 import { getConfig } from './../utils/config'
 
 // Get the width of a col by span including the covered space.
-export default span => {
+export default (span) => {
   const config = getConfig()
 
   if (span === 0) {

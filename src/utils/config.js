@@ -2,29 +2,32 @@ const defaults = {
   cols: 4,
   colSpace: 10,
   rowSpace: 15,
-  debug: false
+  debug: false,
 }
 
 // Change defaults for every grid.
-export const setDefaults = values => Object.assign(defaults, values)
+export const setDefaults = (values) => Object.assign(defaults, values)
 // Returns the current defaults.
 export const getDefaults = () => defaults
 
 // Create a new context object with defaults or overrides from props.
-const create = ({
-  padding = 0,
-  cols = defaults.cols,
-  colSpace = defaults.colSpace,
-  rowSpace = defaults.rowSpace,
-  debug = defaults.debug
-}, width) => {
-  const config = ({
+const create = (
+  {
+    padding = 0,
+    cols = defaults.cols,
+    colSpace = defaults.colSpace,
+    rowSpace = defaults.rowSpace,
+    debug = defaults.debug,
+  },
+  width
+) => {
+  const config = {
     width,
     cols,
     colSpace,
     rowSpace,
-    debug
-  })
+    debug,
+  }
 
   if (padding) {
     config.padding = padding

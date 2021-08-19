@@ -1,6 +1,6 @@
 import { getConfig } from './../utils/config'
 
-export default child => {
+export default (child) => {
   const config = getConfig()
   let { span = 1, offset = 0 } = child.props
 
@@ -18,6 +18,6 @@ export default child => {
 
   return {
     span,
-    offset
+    offset,
   }
 }
