@@ -1,23 +1,25 @@
 import React, { useState, useCallback } from 'react'
 import { StyleSheet, View } from 'react-native'
-import enhanceChildren from './enhance-children'
-import { setConfig } from './utils/config'
+import enhanceChildren from './enhance-children/index.js'
+import { setConfig } from './utils/config.js'
 
 const styles = StyleSheet.create({
   initialFullWidth: {
     width: '100%',
   },
-  screen: (config) => ({
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    padding: config.padding,
-  }),
+})
+
+const screenStyles = (config) => ({
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  padding: config.padding,
 })
 
 const useComponentSize = () => {
   const [size, setSize] = useState({})
 
   const onLayout = useCallback((event) => {
+    // react-native-web will round values in some cases causing wrap, e.g. for nested grid.
     const { width, height } = event.nativeEvent.layout
     setSize({ width, height })
   }, [])
@@ -36,5 +38,5 @@ export const Cols = ({ style, children, ...props }) => {
   const config = setConfig(props, size.width)
   const enhancedChildren = enhanceChildren(children, props)
 
-  return <View style={[styles.screen(config), style]}>{enhancedChildren}</View>
+  return <View style={[screenStyles(config), style]}>{enhancedChildren}</View>
 }

@@ -1,10 +1,14 @@
 import { cloneElement, Children } from 'react'
-import { Col } from './../Col'
-import wrapRegular from './wrap-regular'
-import getColWidth from './get-col-width'
-import getColProps from './get-col-props'
-import { getConfig } from './../utils/config'
-import { calculateMarginLeft, calculateMarginRight } from './calculate-margins'
+import { StyleSheet } from 'react-native'
+import { Col } from './../Col.js'
+import wrapRegular from './wrap-regular.js'
+import getColWidth from './get-col-width.js'
+import getColProps from './get-col-props.js'
+import { getConfig } from './../utils/config.js'
+import {
+  calculateMarginLeft,
+  calculateMarginRight,
+} from './calculate-margins.js'
 
 // Stores the number of current cols during iteration.
 let positionStart
@@ -55,7 +59,12 @@ const mapChild = (props, child) => {
   }
 
   if (props.colStyle) {
-    newProps.style = props.colStyle
+    // react-native-web compatibility, see https://necolas.github.io/react-native-web/docs/styling
+    if (typeof props.colStyle === 'number') {
+      newProps.style = StyleSheet.flatten(props.colStyle)
+    } else {
+      newProps.style = props.colStyle
+    }
   }
 
   return cloneElement(child, newProps)

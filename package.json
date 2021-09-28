@@ -8,24 +8,29 @@
   "scripts": {
     "app": "node create-app.js",
     "watch": "cpx 'src/**/*' app/node_modules/react-native-cols/src --watch",
-    "test": "jest"
+    "test": "jest",
+    "release": "npx standard-version"
   },
   "type": "module",
   "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
   "files": [
     "src"
   ],
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@react-native-community/eslint-config": "^3.0.0",
-    "babel-jest": "^27.0.6",
+    "@babel/core": "^7.15.5",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "babel-jest": "^27.2.3",
     "cpx": "^1.5.0",
     "eslint": "^7.32.0",
-    "jest": "^27.0.6",
+    "jest": "^27.2.3",
     "metro-react-native-babel-preset": "^0.66.2",
-    "prettier": "^2.3.2",
+    "prettier": "^2.4.1",
     "react": "^17.0.2",
-    "react-native": "^0.65.0",
+    "react-native": "^0.65.1",
     "react-test-renderer": "^17.0.2",
     "recursive-copy": "^2.0.13",
     "rimraf": "^3.0.2"

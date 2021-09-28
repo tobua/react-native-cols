@@ -1,4 +1,4 @@
-import { getConfig } from './../utils/config'
+import { getConfig } from './../utils/config.js'
 
 // Get the width of a col by span including the covered space.
 export default (span) => {

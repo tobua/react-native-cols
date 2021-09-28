@@ -1,7 +1,7 @@
 import React from 'react'
-import { Col } from './../Col'
-import { getConfig } from './../utils/config'
-import getColWidth from './get-col-width'
+import { Col } from './../Col.js'
+import { getConfig } from './../utils/config.js'
+import getColWidth from './get-col-width.js'
 
 export default (child, props) => {
   const config = getConfig()

@@ -1,4 +1,4 @@
-import { getConfig } from './../utils/config'
+import { getConfig } from './../utils/config.js'
 
 export default (child) => {
   const config = getConfig()

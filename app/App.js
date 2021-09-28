@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet, View, ScrollView, Text, Platform } from 'react-native'
 import { Cols, Col } from 'react-native-cols'
 

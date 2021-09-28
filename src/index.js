@@ -1,2 +1,2 @@
-export { Col } from './Col'
-export { Cols } from './Cols'
+export { Col } from './Col.js'
+export { Cols } from './Cols.js'

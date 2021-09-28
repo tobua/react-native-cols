@@ -1,5 +1,5 @@
-import { getConfig } from './../utils/config'
-import getColWidth from './get-col-width'
+import { getConfig } from './../utils/config.js'
+import getColWidth from './get-col-width.js'
 
 // Calculates the left margin necessary inclucing offset margin.
 export const calculateMarginLeft = (position, offset = 0) => {

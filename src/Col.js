@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import getPosition from './utils/get-position'
+import getPosition from './utils/get-position.js'
 
 const createStyles = ({
   width,
