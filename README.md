@@ -5,6 +5,8 @@
 
 # React Native Cols
 
+[![npm](https://img.shields.io/npm/v/react-native-cols)](https://npmjs.com/react-native-cols) [![Try in CodeSandbox](https://img.shields.io/badge/Try%20in-CodeSandbox-blue?style=flat-square&logo=codesandbox)](https://codesandbox.io/s/react-native-cols-35q4s)
+
 Grid for React Native Apps.
 
 ## Installation
