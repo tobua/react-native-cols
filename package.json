@@ -1,7 +1,7 @@
 {
   "name": "react-native-cols",
   "description": "Grid Component for React Native.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repository": "github:tobua/react-native-cols",
   "license": "MIT",
   "author": "Matthias Giger",
@@ -19,6 +19,13 @@
   },
   "files": [
     "src"
+  ],
+  "keywords": [
+    "react-native",
+    "grid",
+    "column",
+    "row",
+    "cols"
   ],
   "devDependencies": {
     "@babel/core": "^7.15.5",
