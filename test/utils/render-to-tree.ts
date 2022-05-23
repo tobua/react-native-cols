@@ -1,13 +1,14 @@
+import { ReactElement } from 'react'
 import renderer, { act } from 'react-test-renderer'
 import { Cols } from 'react-native-cols'
-import { viewWidth, nestedViewWidth } from './../constants'
+import { viewWidth, nestedViewWidth } from '../constants'
 
-export default (Grid) => {
+export default (Grid: ReactElement) => {
   const rendered = renderer.create(Grid)
 
   // onLayout is only called on the actual device, so we need to mock it here.
   act(() => {
-    rendered.root.findAllByType(Cols).map((node) => {
+    rendered.root.findAllByType(Cols).map((node: any) => {
       if (
         node._fiber.child &&
         node._fiber.child.stateNode &&
@@ -24,7 +25,7 @@ export default (Grid) => {
   // Call onLayout again for nested Grids that weren't rendered since onlayout
   // of the outer grids hasn't been called yet, width is now 200.
   act(() => {
-    rendered.root.findAllByType(Cols).map((node) => {
+    rendered.root.findAllByType(Cols).map((node: any) => {
       if (
         node._fiber.child &&
         node._fiber.child.stateNode &&
@@ -38,5 +39,5 @@ export default (Grid) => {
     })
   })
 
-  return rendered.toJSON()
+  return rendered.toJSON() as any
 }

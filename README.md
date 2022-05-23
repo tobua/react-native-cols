@@ -1,6 +1,6 @@
 <p></p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/naminho/react-native-cols/master/preview.png" width="400" alt="React Native Cols Preview">
+  <img src="https://raw.githubusercontent.com/tobua/react-native-cols/main/preview.png" width="400" alt="React Native Cols Preview">
 </p>
 
 # React Native Cols
@@ -98,13 +98,6 @@ The column can be a configured with the following props:
 `style` Optional styles added to the component, possibly overriding generated
 values.
 
-## Running the Example App
+## Development
 
-The example app shown on top is found in the repository. Run it by cloning this repository and then executing the following commands inside the main directory.
-
-```
-npm install
-npm run app --silent
-cd app
-react-native run-ios
-```
+This plugin was build with [create-react-native-plugin](https://github.com/tobua/create-react-native-plugin) please refer to it's documentation on how to run the example app and make changes.

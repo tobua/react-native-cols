@@ -1,10 +1,7 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
 import { Cols, Col } from 'react-native-cols'
 import renderToTree from './utils/render-to-tree'
-import { getDefaults } from './../src/utils/config'
-
-const { cols, colSpace, rowSpace, debug } = getDefaults()
 
 test('Correct defaults without config are applied.', () => {
   const Grid = (
@@ -20,14 +17,14 @@ test('Correct defaults without config are applied.', () => {
     flexDirection: 'row',
     flexWrap: 'wrap',
   })
-  expect(tree.children.length).toEqual(1)
+  expect(tree.children?.length).toEqual(1)
 
   // Non Col elements are wrapped in a full width Col.
   const col = tree.children[0]
 
   expect(col.type).toEqual('View')
-  expect(col.props.style.width).toEqual(400)
-  expect(col.props.style.backgroundColor).not.toBeDefined()
+  expect(col.props.style[0].width).toEqual(400)
+  expect(col.props.style[0].backgroundColor).not.toBeDefined()
 
   const text = col.children[0]
 
@@ -50,7 +47,7 @@ test('Debug mode can be set on Cols coloring the cols.', () => {
   const col = tree.children[0]
 
   expect(col.type).toEqual('View')
-  expect(col.props.style.backgroundColor).toEqual('#cccccc')
+  expect(col.props.style[0].backgroundColor).toEqual('#cccccc')
 
   const text = col.children[0]
 
@@ -74,7 +71,7 @@ test('Global padding around Grid can be set.', () => {
   const col = tree.children[0]
 
   expect(col.type).toEqual('View')
-  expect(col.props.style.width).toEqual(380)
+  expect(col.props.style[0].width).toEqual(380)
 })
 
 test('Cols style is added to the wrapper.', () => {
@@ -111,8 +108,8 @@ test('colStyle is added to wrapped Col.', () => {
   const col = tree.children[0]
 
   expect(col.type).toEqual('View')
-  expect(col.props.style.borderWidth).toEqual(style.borderWidth)
-  expect(col.props.style.borderColor).toEqual(style.borderColor)
+  expect(col.props.style[1].borderWidth).toEqual(style.borderWidth)
+  expect(col.props.style[1].borderColor).toEqual(style.borderColor)
 })
 
 test('colSpace and rowSpace can be configured.', () => {
@@ -121,8 +118,12 @@ test('colSpace and rowSpace can be configured.', () => {
   const Grid = (
     <Cols colSpace={currentColSpace} rowSpace={currentRowSpace}>
       <Text>ColStyle</Text>
-      <Col span={4} />
-      <Col />
+      <Col span={4}>
+        <View />
+      </Col>
+      <Col>
+        <View />
+      </Col>
     </Cols>
   )
 
@@ -136,8 +137,8 @@ test('colSpace and rowSpace can be configured.', () => {
 
   expect(tree.children.length).toEqual(3)
 
-  expect(tree.children[0].props.style.marginBottom).toEqual(currentRowSpace)
-  expect(tree.children[1].props.style.marginBottom).toEqual(currentRowSpace)
+  expect(tree.children[0].props.style[0].marginBottom).toEqual(currentRowSpace)
+  expect(tree.children[1].props.style[0].marginBottom).toEqual(currentRowSpace)
   // Should last row really have rowSpace added?
-  expect(tree.children[2].props.style.marginBottom).toEqual(currentRowSpace)
+  expect(tree.children[2].props.style[0].marginBottom).toEqual(currentRowSpace)
 })

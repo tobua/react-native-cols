@@ -2,17 +2,16 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { Cols, Col } from 'react-native-cols'
 import renderToTree from './utils/render-to-tree'
-import { getDefaults } from './../src/utils/config'
-import { viewWidth, nestedViewWidth } from './constants'
+import { getDefaults } from '../helper'
+import { nestedViewWidth } from './constants'
 
-const { colSpace, rowSpace, debug } = getDefaults()
+const { colSpace } = getDefaults()
 
-const colWidth = (currentCols, colSpace, totalCols, width) =>
-  ((width - colSpace * (totalCols - 1)) / totalCols) * currentCols +
-  (currentCols - 1) * colSpace
+const colWidth = (currentCols: number, localColSpace: number, totalCols: number, width: number) =>
+  ((width - localColSpace * (totalCols - 1)) / totalCols) * currentCols +
+  (currentCols - 1) * localColSpace
 
 test('Basic nesting is possible.', () => {
-  const style = { color: 'red' }
   const Grid = (
     <Cols>
       <View>
@@ -40,13 +39,12 @@ test('Basic nesting is possible.', () => {
 
   const col = nested.children[0].children[0]
 
-  expect(col.props.style.marginLeft).toEqual(0)
-  expect(col.props.style.width).toEqual(nestedViewWidth)
-  expect(col.props.style.marginRight).toEqual(0)
+  expect(col.props.style[0].marginLeft).toEqual(0)
+  expect(col.props.style[0].width).toEqual(nestedViewWidth)
+  expect(col.props.style[0].marginRight).toEqual(0)
 })
 
 test('Cols can be a direct descendant of another Cols.', () => {
-  const style = { color: 'red' }
   const Grid = (
     <Cols>
       <Cols>
@@ -59,24 +57,31 @@ test('Cols can be a direct descendant of another Cols.', () => {
 
   const col = tree.children[0].children[0].children[0]
 
-  expect(col.props.style.marginLeft).toEqual(0)
-  expect(col.props.style.width).toEqual(nestedViewWidth)
-  expect(col.props.style.marginRight).toEqual(0)
+  expect(col.props.style[0].marginLeft).toEqual(0)
+  expect(col.props.style[0].width).toEqual(nestedViewWidth)
+  expect(col.props.style[0].marginRight).toEqual(0)
 
   expect(col.children[0].type).toEqual('Text')
 })
 
 test('Nested cols get the proper widths.', () => {
-  const style = { color: 'red' }
   const Grid = (
     <Cols cols={2}>
       <Cols>
-        <Col />
-        <Col span={2} />
+        <Col>
+          <View />
+        </Col>
+        <Col span={2}>
+          <View />
+        </Col>
       </Cols>
       <Cols>
-        <Col span={3} />
-        <Col />
+        <Col span={3}>
+          <View />
+        </Col>
+        <Col>
+          <View />
+        </Col>
       </Cols>
     </Cols>
   )
@@ -103,27 +108,27 @@ test('Nested cols get the proper widths.', () => {
   const secondNestedGridFirstCol = secondNestedGrid.children[0]
   const secondNestedGridSecondCol = secondNestedGrid.children[1]
 
-  expect(firstNestedGridFirstCol.props.style.marginLeft).toEqual(0)
-  expect(firstNestedGridFirstCol.props.style.width).toEqual(
+  expect(firstNestedGridFirstCol.props.style[0].marginLeft).toEqual(0)
+  expect(firstNestedGridFirstCol.props.style[0].width).toEqual(
     colWidth(1, colSpace, 4, nestedViewWidth)
   )
-  expect(firstNestedGridFirstCol.props.style.marginRight).toEqual(colSpace / 2)
+  expect(firstNestedGridFirstCol.props.style[0].marginRight).toEqual(colSpace / 2)
 
-  expect(firstNestedGridSecondCol.props.style.marginLeft).toEqual(colSpace / 2)
-  expect(firstNestedGridSecondCol.props.style.width).toEqual(
+  expect(firstNestedGridSecondCol.props.style[0].marginLeft).toEqual(colSpace / 2)
+  expect(firstNestedGridSecondCol.props.style[0].width).toEqual(
     colWidth(2, colSpace, 4, nestedViewWidth)
   )
-  expect(firstNestedGridSecondCol.props.style.marginRight).toEqual(colSpace / 2)
+  expect(firstNestedGridSecondCol.props.style[0].marginRight).toEqual(colSpace / 2)
 
-  expect(secondNestedGridFirstCol.props.style.marginLeft).toEqual(0)
-  expect(secondNestedGridFirstCol.props.style.width).toEqual(
+  expect(secondNestedGridFirstCol.props.style[0].marginLeft).toEqual(0)
+  expect(secondNestedGridFirstCol.props.style[0].width).toEqual(
     colWidth(3, colSpace, 4, nestedViewWidth)
   )
-  expect(secondNestedGridFirstCol.props.style.marginRight).toEqual(colSpace / 2)
+  expect(secondNestedGridFirstCol.props.style[0].marginRight).toEqual(colSpace / 2)
 
-  expect(secondNestedGridSecondCol.props.style.marginLeft).toEqual(colSpace / 2)
-  expect(secondNestedGridSecondCol.props.style.width).toEqual(
+  expect(secondNestedGridSecondCol.props.style[0].marginLeft).toEqual(colSpace / 2)
+  expect(secondNestedGridSecondCol.props.style[0].width).toEqual(
     colWidth(1, colSpace, 4, nestedViewWidth)
   )
-  expect(secondNestedGridSecondCol.props.style.marginRight).toEqual(0)
+  expect(secondNestedGridSecondCol.props.style[0].marginRight).toEqual(0)
 })
