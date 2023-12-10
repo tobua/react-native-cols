@@ -1,5 +1,6 @@
 node_modules
 package-lock.json
 dist
+ColsApp
 app/**/*
-!app/App.js
+!app/App.tsx

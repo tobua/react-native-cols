@@ -134,7 +134,7 @@ test('Renders three cols with cols set to 7 correctly.', () => {
   expect(tree.children[1].props.style[0].marginRight).toEqual(colSpace / 2)
 
   expect(tree.children[2].props.style[0].marginLeft).toEqual(
-    colWidth(1, colSpace, cols) + colSpace + colSpace / 2
+    colWidth(1, colSpace, cols) + colSpace + colSpace / 2,
   )
   expect(tree.children[2].props.style[0].width).toEqual(colWidth(1, colSpace, cols))
   expect(tree.children[2].props.style[0].marginRight).toEqual(0)
@@ -149,6 +149,6 @@ test('Renders three cols with cols set to 7 correctly.', () => {
       tree.children[1].props.style[0].marginRight +
       tree.children[2].props.style[0].marginLeft +
       tree.children[2].props.style[0].width +
-      tree.children[2].props.style[0].marginRight
+      tree.children[2].props.style[0].marginRight,
   ).toEqual(viewWidth)
 })

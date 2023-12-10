@@ -110,25 +110,25 @@ test('Nested cols get the proper widths.', () => {
 
   expect(firstNestedGridFirstCol.props.style[0].marginLeft).toEqual(0)
   expect(firstNestedGridFirstCol.props.style[0].width).toEqual(
-    colWidth(1, colSpace, 4, nestedViewWidth)
+    colWidth(1, colSpace, 4, nestedViewWidth),
   )
   expect(firstNestedGridFirstCol.props.style[0].marginRight).toEqual(colSpace / 2)
 
   expect(firstNestedGridSecondCol.props.style[0].marginLeft).toEqual(colSpace / 2)
   expect(firstNestedGridSecondCol.props.style[0].width).toEqual(
-    colWidth(2, colSpace, 4, nestedViewWidth)
+    colWidth(2, colSpace, 4, nestedViewWidth),
   )
   expect(firstNestedGridSecondCol.props.style[0].marginRight).toEqual(colSpace / 2)
 
   expect(secondNestedGridFirstCol.props.style[0].marginLeft).toEqual(0)
   expect(secondNestedGridFirstCol.props.style[0].width).toEqual(
-    colWidth(3, colSpace, 4, nestedViewWidth)
+    colWidth(3, colSpace, 4, nestedViewWidth),
   )
   expect(secondNestedGridFirstCol.props.style[0].marginRight).toEqual(colSpace / 2)
 
   expect(secondNestedGridSecondCol.props.style[0].marginLeft).toEqual(colSpace / 2)
   expect(secondNestedGridSecondCol.props.style[0].width).toEqual(
-    colWidth(1, colSpace, 4, nestedViewWidth)
+    colWidth(1, colSpace, 4, nestedViewWidth),
   )
   expect(secondNestedGridSecondCol.props.style[0].marginRight).toEqual(0)
 })

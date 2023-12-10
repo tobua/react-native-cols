@@ -230,6 +230,6 @@ test('Renders a full row with different spans correctly.', () => {
       tree.children[1].props.style[0].marginRight +
       tree.children[2].props.style[0].marginLeft +
       tree.children[2].props.style[0].width +
-      tree.children[2].props.style[0].marginRight
+      tree.children[2].props.style[0].marginRight,
   ).toEqual(viewWidth)
 })

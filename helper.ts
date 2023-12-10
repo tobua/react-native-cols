@@ -53,7 +53,7 @@ export const getPosition = ({
 }
 
 export const createColStyles = (
-  props: Omit<ColProps, 'children'> & Partial<Config> & Partial<ColPosition>
+  props: Omit<ColProps, 'children'> & Partial<Config> & Partial<ColPosition>,
 ) => {
   let view: StyleProp<ViewStyle> = {
     width: props.width,

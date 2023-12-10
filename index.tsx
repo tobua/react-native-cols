@@ -52,7 +52,7 @@ export const Cols = ({ style, children, ...props }: ColsProps & Partial<Config>)
   const enhancedChildren = enhanceChildren(
     Array.isArray(children) ? children : [children],
     props,
-    config
+    config,
   )
 
   return <View style={[screenStyles(config), style]}>{enhancedChildren}</View>

@@ -77,7 +77,7 @@ test('Renders a single Col with a span of 2 and an offset of 2.', () => {
   expect(col.props.style[0].marginRight).toEqual(0)
 
   expect(
-    col.props.style[0].marginLeft + col.props.style[0].width + col.props.style[0].marginRight
+    col.props.style[0].marginLeft + col.props.style[0].width + col.props.style[0].marginRight,
   ).toEqual(viewWidth)
 })
 
@@ -103,7 +103,7 @@ test('Renders a single Col with default span of 1 and an offset of 3.', () => {
   expect(col.props.style[0].marginRight).toEqual(0)
 
   expect(
-    col.props.style[0].marginLeft + col.props.style[0].width + col.props.style[0].marginRight
+    col.props.style[0].marginLeft + col.props.style[0].width + col.props.style[0].marginRight,
   ).toEqual(viewWidth)
 })
 
@@ -129,7 +129,7 @@ test('Too much offset is cut down to max possible value.', () => {
   expect(col.props.style[0].marginRight).toEqual(0)
 
   expect(
-    col.props.style[0].marginLeft + col.props.style[0].width + col.props.style[0].marginRight
+    col.props.style[0].marginLeft + col.props.style[0].width + col.props.style[0].marginRight,
   ).toEqual(viewWidth)
 })
 
@@ -160,7 +160,7 @@ test('Renders a full row with different spans correctly.', () => {
   expect(tree.children[0].props.style[0].marginRight).toEqual(colSpace / 2)
 
   expect(tree.children[1].props.style[0].marginLeft).toEqual(
-    colWidth(1, colSpace) + colSpace + colSpace / 2
+    colWidth(1, colSpace) + colSpace + colSpace / 2,
   )
   expect(tree.children[1].props.style[0].width).toEqual(colWidth(2, colSpace))
   expect(tree.children[1].props.style[0].marginRight).toEqual(0)
@@ -180,7 +180,7 @@ test('Renders a full row with different spans correctly.', () => {
       tree.children[0].props.style[0].marginRight +
       tree.children[1].props.style[0].marginLeft +
       tree.children[1].props.style[0].width +
-      tree.children[1].props.style[0].marginRight
+      tree.children[1].props.style[0].marginRight,
   ).toEqual(viewWidth)
 
   expect(
@@ -189,6 +189,6 @@ test('Renders a full row with different spans correctly.', () => {
       tree.children[2].props.style[0].marginRight +
       tree.children[3].props.style[0].marginLeft +
       tree.children[3].props.style[0].width +
-      tree.children[3].props.style[0].marginRight
+      tree.children[3].props.style[0].marginRight,
   ).toEqual(viewWidth)
 })
